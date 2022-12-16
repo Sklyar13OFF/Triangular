@@ -11,8 +11,8 @@ from re import search
 from binance.client import Client
 
 list_of_stable_coins = ['USDC', 'BUSD', 'DAI', 'FRAX', 'USDP', 'TUSD', 'USDD', 'GUSD', 'USDN', 'USDT']
-api_key = 'Zw82anbEVcB286P2qYIPofX0zvswQ5O5E0SQNCnwKPPNsT5vYuERvtDx6v0pfy0B'
-api_secret = 'PqPvNHqU8dv114vMgsv5r7NdYbOXCUhd43mDRr6yAY6H69hP78HioP6rIM2ToHYF'
+api_key = ''
+api_secret = ''
 client = Spot(api_key,api_secret)
 klient = Client(api_key,api_secret)
 async def main():
