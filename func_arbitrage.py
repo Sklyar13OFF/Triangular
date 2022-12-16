@@ -196,39 +196,25 @@ def calc_triangular_arb_surface_rate(t_pair):
     pair_b = t_pair["pair_b"]
     pair_c = t_pair["pair_c"]
     btc_price = {'error': False}
-    def btc_trade_history(msg):
-        ''' define how to process incoming WebSocket messages '''
-        if msg['e'] != 'error':
-            print(msg['c'])
-            btc_price['last'] = msg['c']
-            btc_price['bid'] = msg['b']
-            btc_price['last'] = msg['a']
-            btc_price['error'] = False
-        else:
-            btc_price['error'] = True
-    bsm = ThreadedWebsocketManager()
-    bsm.start()
-    bsm.start_symbol_ticker_socket(callback=btc_trade_history, symbol='BTCUSDT')
+
     # Extract Price Information
 
-    fiat_list = ['zar','uah','try','rub','sar','ron','qar','pln','omr','ngn','kzt','kwd','huf','gbp','eur','czk','brl','bhd','aud','aed']
-    if b_base not in fiat_list and b_quote not in fiat_list:
-        if a_base in list_of_stable_coins:
-
-        else:
+    fiat_list = ['ZAR','UAH','TRY','RUB','SAR','RON','QAR','PLN','OMR','NGN','KZT','KWD','HUF','GBP','EUR','CZK','BRL','BHD','AUD','AED']
 
 
-        if b_base == first_vol:
+    a_ask = 0
+    a_bid = 0
 
+    def triangular_prices(msg):
+        a_ask = msg['a']
+        a_bid = msg['b']
+        print(a_ask,a_bid)
 
-        else:
+    bsm = ThreadedWebsocketManager('Zw82anbEVcB286P2qYIPofX0zvswQ5O5E0SQNCnwKPPNsT5vYuERvtDx6v0pfy0B','PqPvNHqU8dv114vMgsv5r7NdYbOXCUhd43mDRr6yAY6H69hP78HioP6rIM2ToHYF')
+    bsm.start()
+    bsm.start_symbol_book_ticker_socket(callback=triangular_prices, symbol=pair_a)
+    bsm.join()
 
+    return [a_ask,a_bid]
 
-        if c_base == second_vol:
-
-        else:
-
-        if result>starting_amount:
-            return [result,pair_a,pair_b,pair_c]
-        return 'NOT'
 
